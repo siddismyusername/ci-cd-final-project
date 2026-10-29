@@ -68,9 +68,9 @@ spec:
         - name: IMAGE
           value: $(params.build-image)
         - name: DOCKERFILE
-          value: ./Dockerfile
+          value: repository/Dockerfile
         - name: CONTEXT
-          value: .
+          value: repository
       workspaces:
         - name: source
           workspace: source
