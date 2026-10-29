@@ -1,14 +1,24 @@
-# cicd-final-project
+# ci-cd-final-project
 
 ## Project Name
 
-**cicd-final-project — Continuous Integration and Delivery with GitHub Actions, Tekton, and OpenShift**
+**ci-cd-final-project — Continuous Integration and Delivery with GitHub Actions, Tekton, and OpenShift**
 
 ## Project Description
 
 This is the counter-service CI/CD final project for the IBM Continuous Integration and Delivery course. It contains a working Flask REST service, automated Flake8 and Nose checks, a Docker image, and an OpenShift Tekton pipeline.
 
-The public repository should be named **cicd-final-project** for the course grading rubric. If this checkout is still named **OpenShift-CI-CD-Final-Project**, rename it in GitHub **Settings → General → Repository name** before submitting links.
+The public repository and project are both named **ci-cd-final-project**, matching the exact repository-name requirement in the course grading rubric.
+
+## Assignment Submission Links
+
+The following public GitHub files correspond to the source-code assessment criteria:
+
+- **Question 1 — Project name and description:** [README.md](https://github.com/siddismyusername/ci-cd-final-project/blob/main/README.md)
+- **Question 2 — Linting with Flake8 and unit tests with Nose:** [.github/workflows/workflow.yml](https://github.com/siddismyusername/ci-cd-final-project/blob/main/.github/workflows/workflow.yml)
+- **Question 3 — Tekton cleanup and Nose testing tasks:** [.tekton/tasks.yml](https://github.com/siddismyusername/ci-cd-final-project/blob/main/.tekton/tasks.yml)
+
+The source files are provided for review. Pipeline success must be documented with actual GitHub Actions and OpenShift run output.
 
 ## Service API
 
@@ -66,7 +76,7 @@ oc apply -f .tekton/pipeline.yml
 
 NAMESPACE="$(oc project -q)"
 tkn pipeline start cicd-pipeline \
-  -p repo-url="https://github.com/siddismyusername/cicd-final-project.git" \
+  -p repo-url="https://github.com/siddismyusername/ci-cd-final-project.git" \
   -p revision="main" \
   -p build-image="image-registry.openshift-image-registry.svc:5000/$NAMESPACE/cicd-app:latest" \
   -w name=source,claimName=oc-lab-pvc \
