@@ -7,7 +7,7 @@ spec:
   params:
     - name: repo-url
       type: string
-      default: https://github.com/siddismyusername/cicd-final-project.git
+      default: https://github.com/siddismyusername/ci-cd-final-project.git
     - name: revision
       type: string
       default: main
