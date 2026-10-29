@@ -5,32 +5,46 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.9'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 nose
+          python -m pip install -r requirements.txt
 
-      - name: Lint with flake8
+      - name: Initialize containers
         run: |
-          flake8 .
+          docker info > /dev/null
+          docker pull python:3.9-slim
 
-      - name: Run unit tests with nose
-        run: |
-          nosetests
+      - name: Linting
+        run: flake8 service tests
+
+      - name: Run unit tests
+        run: nosetests -v tests
 
       - name: Complete job
-        run: echo "CI workflow completed successfully"
+        run: echo "CI checks completed successfully"
